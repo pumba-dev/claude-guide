@@ -15,12 +15,12 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 | Min | Tópico |
 |---|---|
 | 0–1 | Quem sou, por que este formato: uma aula de "por quê" e outra, inteira, de mão na massa. |
-| 1–2 | A promessa concreta: ao final você abre o Claude no seu repositório de simulação e sabe o que está acontecendo em cada camada. |
+| 1–2 | A promessa concreta: ao final das duas aulas você abre o Claude no seu próprio projeto e sabe o que está acontecendo em cada camada. |
 | 2–3 | Mapa da sessão: mostrar a pirâmide de dependências (token → janela → sessão → agente) e dizer que a ordem é obrigatória, não estética. |
 
 **O que mostrar:** um slide único com a cadeia de dependências. Ele reaparece no início de cada bloco com o item atual destacado — é a barra de progresso conceitual da apresentação.
 
-**Frase de abertura sugerida:** "Vocês já sabem ler um paper e já sabem programar. O que falta é saber o que acontece entre apertar Enter e a resposta aparecer. Nos próximos 60 minutos a gente abre essa caixa, e nos 30 seguintes vocês operam ela."
+**Frase de abertura sugerida:** "Vocês já sabem ler um paper e já sabem programar. O que falta é saber o que acontece entre apertar Enter e a resposta aparecer. Nesta aula a gente abre essa caixa. Na próxima, vocês operam ela."
 
 ---
 
