@@ -21,6 +21,7 @@ Nomes de arquivo: caminho da URL com `/` trocado por `--`.
 | modelos | `code/model-config.md`, `chat/*choose-a-claude-plan*` |
 | thinking / effort | `code/model-config.md`, `code/settings.md` |
 | skills | `chat/skills--overview.md`, `chat/skills--how-to.md`, `code/skills.md` |
-| references | `code/memory.md`, `code/common-workflows.md` |
+| references (arquivos de apoio de skill) | `code/skills.md` (seção "Add supporting files"), `chat/skills--how-to.md` (seção "Adding resources") |
+| memória / CLAUDE.md (não confundir com references) | `code/memory.md` |
 | subagents | `code/sub-agents.md`, `code/agent-sdk--subagents.md`, `code/agent-teams.md` |
 | agente orquestrador | `code/agent-sdk--agent-loop.md`, `cowork/cowork--guide--dispatch.md` |
