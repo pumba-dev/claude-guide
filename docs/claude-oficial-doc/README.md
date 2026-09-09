@@ -16,12 +16,24 @@ Nomes de arquivo: caminho da URL com `/` trocado por `--`.
 
 | Conceito | Arquivos |
 |---|---|
+| janela de contexto | `code/context-window.md`, `code/costs.md` |
 | sessão | `code/sessions.md`, `code/agent-sdk--sessions.md` |
-| janela de contexto | `code/costs.md`, `code/sessions.md` |
+| contexto persistente | `code/memory.md`, `chat/11473015-retrieval-augmented-generation-rag-for-projects.md`, `chat/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context.md` |
 | modelos | `code/model-config.md`, `chat/*choose-a-claude-plan*` |
-| thinking / effort | `code/model-config.md`, `code/settings.md` |
+| thinking e effort | `code/model-config.md`, `code/settings.md`, `chat/11095361-when-should-i-use-web-search-extended-thinking-and-research.md` |
+| tool use / MCP e connectors | `code/mcp.md`, `code/mcp-quickstart.md`, `chat/11176164-use-connectors-to-extend-claude-s-capabilities.md` |
 | skills | `chat/skills--overview.md`, `chat/skills--how-to.md`, `code/skills.md` |
 | references (arquivos de apoio de skill) | `code/skills.md` (seção "Add supporting files"), `chat/skills--how-to.md` (seção "Adding resources") |
-| memória / CLAUDE.md (não confundir com references) | `code/memory.md` |
 | subagents | `code/sub-agents.md`, `code/agent-sdk--subagents.md`, `code/agent-teams.md` |
 | agente orquestrador | `code/agent-sdk--agent-loop.md`, `cowork/cowork--guide--dispatch.md` |
+| permissões e plan mode | `code/permissions.md`, `code/permission-modes.md`, `code/agent-sdk--permissions.md` |
+| verificação | Bloco 5 — prática, sem página própria |
+
+## Conceitos de apoio
+
+| Conceito | Arquivos |
+|---|---|
+| prompt caching / compaction | `code/costs.md`, `code/context-window.md` |
+| hooks | `code/hooks-guide.md`, `code/hooks.md` |
+| checkpointing | `code/checkpointing.md` |
+| privacidade e uso de dados | `code/analytics.md`, artigos de privacidade em `chat/` |
