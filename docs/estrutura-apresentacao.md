@@ -115,4 +115,4 @@ O detalhamento minutado de cada bloco, com o que mostrar e a âncora prática de
 
 Cada bloco de 1 a 5 **deve terminar com uma âncora prática**: uma frase de consequência imediata para o dia a dia do aluno, do tipo "por isso conversa longa degrada" ou "por isso vale abrir sessão nova".
 
-Isso é requisito, não enfeite. É o que impede que os primeiros 30 minutos pareçam teoria solta.
+Isso é requisito, não enfeite. É o que impede que a Aula 1 inteira pareça teoria solta, esperando por uma prática que só vem na semana seguinte.

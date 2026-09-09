@@ -1,6 +1,6 @@
 # Gabarito da prática — não distribuir aos alunos
 
-Este diretório é **material do instrutor**. Os alunos constroem tudo isto do zero durante o Bloco P, conversando com o Claude Code. Entregar o gabarito pronto anularia a prática.
+Este diretório é **material do instrutor**. Os alunos constroem tudo isto do zero durante a Aula 2, conversando com o Claude Code. Entregar o gabarito pronto anularia a prática.
 
 Ele serve para três coisas:
 

@@ -14,7 +14,7 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 | Min | Tópico |
 |---|---|
-| 0–1 | Quem sou, por que este formato: 60 min de "por quê" + 30 min de mão na massa. |
+| 0–1 | Quem sou, por que este formato: uma aula de "por quê" e outra, inteira, de mão na massa. |
 | 1–2 | A promessa concreta: ao final você abre o Claude no seu repositório de simulação e sabe o que está acontecendo em cada camada. |
 | 2–3 | Mapa da sessão: mostrar a pirâmide de dependências (token → janela → sessão → agente) e dizer que a ordem é obrigatória, não estética. |
 
@@ -144,4 +144,4 @@ Em uma linha: em pasta vazia, o aluno pede ao agente que escreva o `CLAUDE.md` d
 |---|---|
 | Bloco 5 tem 5 min para permissões, plan mode, reprodutibilidade, dados sensíveis e honestidade acadêmica | O roteiro já prioriza: os exemplos de uso (0–1.5) são o material sacrificável; as regras não. Se apertar na simulação, propor ao autor mover 2 min do Bloco 4, que tem folga. |
 | Bloco 1 pode virar aula de deep learning | Amostragem e temperatura são menção de 1 minuto. Atenção é intuição, sem uma equação no slide. |
-| Setup do Bloco P consome os 30 min | Enviar instruções de instalação **antes** da sessão e reservar os 5 min apenas para verificação. |
+| Aluno chega na Aula 2 sem ambiente instalado | Cobrar o pré-requisito logo após a Aula 1: Claude Code funcionando e 4 a 6 fontes rascunhadas. Detalhes em [pratica-guiada.md](pratica-guiada.md). |
