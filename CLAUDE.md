@@ -2,7 +2,7 @@
 
 Você é o agente orquestrador deste projeto.
 
-**Objetivo:** produzir todos os artefatos de uma apresentação de ~90 minutos (60 min de exposição + 30 min de bloco prático) sobre IA Generativa, LLMs e o ecossistema Claude, para alunos de mestrado de um laboratório de computação.
+**Objetivo:** produzir todos os artefatos de uma formação em **duas aulas de 60 minutos** — Aula 1 conceitual, Aula 2 prática — sobre IA Generativa, LLMs e o ecossistema Claude, para alunos de mestrado de um laboratório de computação.
 
 ## Esquema da apresentação
 

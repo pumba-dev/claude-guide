@@ -60,20 +60,52 @@ Entram a serviço dos doze acima, nunca como tópico próprio:
 
 Fonte de consulta para todos: [claude-oficial-doc/](claude-oficial-doc/).
 
-## Estrutura aprovada (abordagem bottom-up)
+## Formato
+
+Duas aulas de 60 minutos.
+
+| Aula | Duração | Foco |
+|---|---|---|
+| **Aula 1 — Conceitos** | 60 min | Blocos 0 a 6. Por que o modelo se comporta como se comporta e o que são os doze conceitos. |
+| **Aula 2 — Prática** | 60 min | Bloco P. Cada aluno constrói do zero o próprio agente de newsletter, com orquestrador, skills e references. |
+
+Separar em duas aulas resolve o aperto do formato anterior: a Aula 1 fecha exatos 60 min sem cortar conteúdo, e a prática deixa de ser um apêndice de 30 min corridos.
+
+**Entre as duas aulas:** enviar as instruções de instalação e pedir que cada aluno chegue com o Claude Code funcionando e uma lista rascunhada de 4 a 6 fontes da área dele. Isso devolve tempo real à Aula 2.
+
+## Aula 1 — Conceitos (60 min)
 
 **Não reordene os blocos sem consultar o autor.** A ordem segue uma cadeia de dependências conceituais: token sustenta janela de contexto, que sustenta sessão, thinking e effort; tool use sustenta orquestrador e subagents.
 
 | Bloco | Tempo | Conteúdo |
 |---|---|---|
-| 0 — Abertura | 3 min | Objetivo, mapa da sessão, o que cada um sai sabendo fazer. |
+| 0 — Abertura | 3 min | Objetivo, mapa das duas aulas, o que cada um sai sabendo fazer. |
 | 1 — Fundamentos de LLM | 12 min | Discriminativo vs. generativo; token como unidade de custo, limite e latência; predição do próximo token; intuição de atenção e Transformer, com o custo superlinear que origina o limite de contexto; pré-treino vs. post-training; amostragem e temperatura; três limitações estruturais (alucinação, data de corte, ausência de estado). |
 | 2 — Anatomia de uma requisição | 14 min | O que é enviado ao modelo a cada turno; janela de contexto como orçamento finito, com números de custo e contagem de tokens; sessão como reenvio de histórico em um modelo stateless, com consequências em custo, latência e degradação; prompt caching como a razão de o reenvio ser viável; compaction como resposta do sistema à saturação; contexto persistente (CLAUDE.md, Projects, memória) como o que atravessa sessões; escolha de modelo; thinking e effort. |
 | 3 — Do sistema ao agente | 15 min | Tool use apresentado via MCP e connectors, como protocolo cliente-servidor; laço perceber-planejar-agir-observar; agente orquestrador; skills carregadas sob demanda; references (`references/`, `scripts/`, `assets/`) como o material que a skill abre só quando precisa; subagents e contextos isolados como solução para saturação de janela. |
 | 4 — Claude concreto | 9 min | Família de modelos; Chat, Cowork e Code como três interfaces sobre a mesma base conceitual; superfícies do Code (terminal, IDE, desktop, web); onde cada conceito da Camada C aparece em cada produto — Projects e memória no Chat, dispatch e agent teams no Cowork, skills, subagents, hooks e checkpointing no Code; tabela de "quando usar qual". |
 | 5 — Aplicação em pesquisa em computação | 5 min | Organizado por **tipo de trabalho, não por domínio**, para cobrir os projetos do laboratório — de redes ópticas elásticas a aplicações em educação e saúde e revisões bibliográficas: entender artefato herdado, analisar resultado experimental, levantar e organizar literatura, apoiar a escrita; **permissões e modos de execução (incl. plan mode)** como portão do agente sobre um repositório real; verificação obrigatória, dados sensíveis — distinguindo dado técnico de dado de pessoa sob TCLE, ética em pesquisa e LGPD, com a política oficial de privacidade e uso de dados — e honestidade acadêmica. |
-| 6 — Fechamento | 2 min | Fechamento e ponte para a prática. |
-| P — Prática guiada | 30 min | Newsletter semanal da área do aluno no Claude Code, construída **do zero**: em pasta vazia, o aluno pede ao agente que escreva o `CLAUDE.md` do orquestrador, as skills e os arquivos de `references/`; coloca as próprias fontes; aciona sob demanda, sem agendamento; e verifica os links da edição gerada. 3 min de setup, 2 de linha de base com `/context`, 5 de orquestrador, 6 de skills, 4 de fontes, 6 de execução com um subagente por fonte, 3 de verificação e 1 de fechamento. Folha do aluno em [folha-do-aluno.md](folha-do-aluno.md), plano do instrutor em [pratica-guiada.md](pratica-guiada.md), gabarito em [`gabarito/`](../gabarito/). |
+| 6 — Fechamento | 2 min | Fechamento, ponte para a Aula 2 e tarefa de preparação: instalar o Claude Code e rascunhar 4 a 6 fontes da própria área. |
+
+## Aula 2 — Prática (60 min)
+
+Newsletter semanal da área do aluno no Claude Code, construída **do zero**. Em pasta vazia, o aluno pede ao agente que escreva o `CLAUDE.md` do orquestrador, as skills e os arquivos de `references/`; coloca as próprias fontes; aciona sob demanda, sem agendamento; verifica os links da edição gerada; e por fim muda o tom pelo arquivo de apoio, sem tocar em nenhuma skill.
+
+| Min | Etapa |
+|---|---|
+| 0–4 | Retomada dos doze conceitos e do que será construído |
+| 4–8 | Setup e linha de base com `/context` |
+| 8–16 | Orquestrador, criado em plan mode |
+| 16–26 | Skills e references |
+| 26–32 | Fontes próprias |
+| 32–44 | Acionar e observar os subagents |
+| 44–50 | Verificar links e recolher erros |
+| 50–56 | Trocar o tom pelo `references/` e reexecutar |
+| 56–60 | Debrief e ponte para o projeto de cada um |
+
+Com 60 min, a Aula 2 exercita **todos os doze conceitos**: plan mode e permissões entram na criação do orquestrador, e modelo e effort entram como comparação opcional na execução.
+
+Folha do aluno em [folha-do-aluno.md](folha-do-aluno.md), plano do instrutor em [pratica-guiada.md](pratica-guiada.md), gabarito em [`gabarito/`](../gabarito/).
 
 ## Roteiro detalhado
 

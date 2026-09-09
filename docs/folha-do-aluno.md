@@ -1,4 +1,4 @@
-# Folha do aluno — construa seu agente de newsletter
+# Folha do aluno — Aula 2
 
 Você vai montar, do zero, um agente que busca o que saiu na **semana passada** na sua área e escreve uma newsletter.
 
@@ -6,16 +6,23 @@ Você não vai escrever os arquivos à mão. Você vai pedir ao Claude Code que 
 
 Nada aqui fica agendado. O agente é acionado por você e para quando termina.
 
+## Antes da aula
+
+- [ ] Claude Code instalado e funcionando (`claude --version` responde)
+- [ ] Uma lista rascunhada de 4 a 6 fontes da sua área, com as URLs
+
+Chegar sem isso custa os primeiros 15 minutos da sua aula.
+
 ---
 
-## 0. Preparar (2 min)
+## 0. Preparar (4 min)
 
 ```bash
 mkdir newsletter && cd newsletter
 claude
 ```
 
-Antes de pedir qualquer coisa, rode:
+Antes de pedir qualquer coisa:
 
 ```
 /context
@@ -25,9 +32,11 @@ Antes de pedir qualquer coisa, rode:
 
 ---
 
-## 1. Criar o orquestrador (5 min)
+## 1. Criar o orquestrador, em plan mode (8 min)
 
-Peça, com suas palavras ou copiando:
+Entre em plan mode antes de pedir. O agente vai **planejar e mostrar** antes de escrever qualquer arquivo.
+
+Peça:
 
 > Crie um arquivo CLAUDE.md que faça de você o orquestrador de uma newsletter semanal da minha área de pesquisa.
 >
@@ -35,13 +44,15 @@ Peça, com suas palavras ou copiando:
 >
 > Regras: nunca inventar item ou link; item sem link verificável não entra; fonte sem novidade na janela é resultado válido; não criar nenhum agendamento ou tarefa recorrente.
 
-Quando ele terminar, **leia o arquivo**. Você entende cada passo? Tem algo ali que você não pediu?
+Leia o plano **antes** de aprovar. Ele vai criar o que você esperava? Vai mexer em algo que você não pediu?
+
+Depois de aprovar, **leia o arquivo gerado**. Você entende cada passo?
 
 Checkpoint: existe um `CLAUDE.md` e ele descreve delegação, não execução direta.
 
 ---
 
-## 2. Criar as skills (6 min)
+## 2. Criar as skills (10 min)
 
 > Crie duas skills neste projeto.
 >
@@ -51,13 +62,13 @@ Checkpoint: existe um `CLAUDE.md` e ele descreve delegação, não execução di
 >
 > Crie também um arquivo de referência onde eu vou listar minhas fontes.
 
-Checkpoint: você tem duas pastas de skill, cada uma com um `SKILL.md` **curto** e arquivos de apoio ao lado.
+Checkpoint: duas pastas de skill, cada uma com um `SKILL.md` **curto** e arquivos de apoio ao lado.
 
-Pergunte a si mesmo: por que os critérios e o tom ficaram fora do `SKILL.md`?
+Pergunta para responder antes de seguir: **por que os critérios e o tom ficaram fora do `SKILL.md`?**
 
 ---
 
-## 3. Colocar suas fontes (4 min)
+## 3. Colocar suas fontes (6 min)
 
 Abra o arquivo de fontes que ele criou e coloque **de 4 a 6 fontes suas**: blog de grupo de pesquisa, página de novidades de uma ferramenta que você usa, portal de notícia técnica, chamada de conferência.
 
@@ -70,7 +81,7 @@ Este arquivo é o motivo de a edição de cada pessoa da sala sair diferente com
 
 ---
 
-## 4. Acionar (8 min)
+## 4. Acionar (12 min)
 
 ```
 Gere a edição desta semana.
@@ -82,9 +93,11 @@ Enquanto roda, observe:
 - quantos subagentes abriram? Um por fonte?
 - o que voltou de cada subagente: a página inteira ou só os itens?
 
+**Se sobrar tempo aqui:** rode de novo com outro modelo ou outro nível de effort e compare o resultado, o tempo e o custo.
+
 ---
 
-## 5. Verificar (4 min)
+## 5. Verificar (6 min)
 
 Abra **dois links** da edição.
 
@@ -96,21 +109,29 @@ Se achar um item errado, guarde — vai ser discutido no fechamento. Achar um er
 
 ---
 
-## 6. Fechar (1 min)
+## 6. Trocar o tom (6 min)
+
+Abra o arquivo de tom que o agente criou e mude o público — por exemplo, de "colegas do laboratório" para "calouro de graduação, explicando cada termo técnico na primeira vez que aparece".
+
+Peça:
+
+```
+Reescreva a edição desta semana com o tom atualizado.
+```
+
+Repare no que você **não** precisou tocar: nenhuma skill. A skill é o procedimento; o arquivo de apoio é a configuração.
+
+---
+
+## 7. Fechar (4 min)
 
 ```
 /context
 ```
 
-Compare com o número do passo 0. Quanto custou tudo isso? E quanto teria custado se as páginas tivessem sido lidas no contexto principal?
+Compare com o número do passo 0. Quanto custou tudo isso? E quanto teria custado se as páginas de todas as fontes tivessem sido lidas no contexto principal?
 
----
-
-## Se sobrar tempo
-
-Mude o tom no arquivo de referência — por exemplo, de técnico para "explicando para um calouro" — e peça a reescrita da edição.
-
-Repare no que você **não** precisou tocar: nenhuma skill.
+Última pergunta, para levar: **qual parte do seu trabalho de pesquisa tem essa mesma forma** — várias fontes, um critério seu, um formato de saída fixo?
 
 ---
 
@@ -122,4 +143,5 @@ Repare no que você **não** precisou tocar: nenhuma skill.
 | Uma fonte não abre | Deixe. `nada na janela` ou `fonte inacessível` é resultado válido. |
 | Nenhuma fonte rendeu nada | Peça ao instrutor uma das URLs de reserva. |
 | O agente quer criar agendamento | Diga que não: este agente é acionado sob demanda. |
+| O agente escreveu tudo dentro do `SKILL.md` | Peça para separar: procedimento na skill, critérios e tom em arquivos de apoio. |
 | Ficou para trás | Junte-se a quem está ao lado. A prática funciona em dupla. |

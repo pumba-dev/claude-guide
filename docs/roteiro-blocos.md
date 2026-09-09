@@ -1,6 +1,8 @@
-# Roteiro bloco a bloco
+# Roteiro bloco a bloco — Aula 1
 
-Detalhamento dos blocos definidos em [estrutura-apresentacao.md](estrutura-apresentacao.md). Tempos e ordem dos blocos são os aprovados — não alterar sem consultar o autor.
+Detalhamento dos blocos 0 a 6, que compõem a **Aula 1 (60 min, conceitual)**, definidos em [estrutura-apresentacao.md](estrutura-apresentacao.md). Tempos e ordem são os aprovados — não alterar sem consultar o autor.
+
+A **Aula 2 (60 min, prática)** tem plano próprio em [pratica-guiada.md](pratica-guiada.md), com a folha de prompts do aluno em [folha-do-aluno.md](folha-do-aluno.md).
 
 Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado**, **o que mostrar**, **âncora prática** (obrigatória nos blocos 1 a 5), **fontes** no espelho [claude-oficial-doc/](claude-oficial-doc/).
 
@@ -122,28 +124,15 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 | Min | Tópico |
 |---|---|
 | 0–1 | Retomar a pirâmide de dependências completa, agora com os doze conceitos posicionados. Uma frase por camada. |
-| 1–2 | Ponte para a prática: instruções de setup e formação de duplas. |
+| 1–2 | Ponte para a Aula 2: o que vai ser construído, e a tarefa de preparação — instalar o Claude Code e chegar com 4 a 6 fontes da própria área rascunhadas. Dizer que quem chegar sem isso perde os primeiros 15 minutos. |
 
 ---
 
-## Bloco P — Prática guiada (30 min)
+## Aula 2
 
-**Prática:** newsletter semanal da área do aluno, construída **do zero**. Ninguém clona kit: o aluno abre o Claude Code em pasta vazia e pede ao próprio agente que escreva o `CLAUDE.md` do orquestrador, as skills e os arquivos de `references/`. Depois coloca as fontes dele, aciona e verifica. Agente sob demanda, sem agendamento.
+A prática tem plano próprio, com roteiro minutado de 60 min, o que dizer em cada momento, plano de degradação e riscos: [pratica-guiada.md](pratica-guiada.md).
 
-Folha de prompts do aluno: [folha-do-aluno.md](folha-do-aluno.md). Plano do instrutor, com o que dizer em cada momento, degradação e checklist: [pratica-guiada.md](pratica-guiada.md). Resultado esperado, só para o instrutor: [`gabarito/`](../gabarito/).
-
-| Min | Etapa | Detalhe |
-|---|---|---|
-| 0–3 | Setup | `mkdir newsletter && cd newsletter && claude`. Quem falhar entra em dupla na hora. Instalação enviada antes da sessão. |
-| 3–5 | Linha de base | `/context` e anotar o número. Ver o que já ocupa a janela sem ninguém ter pedido nada. Amarra o Bloco 2. |
-| 5–10 | Criar o orquestrador | O aluno descreve o laço em linguagem natural e o agente escreve o `CLAUDE.md`. Depois **lê o arquivo gerado**. Descoberta central: as instruções do agente são Markdown que ele mesmo sabe escrever. |
-| 10–16 | Criar as skills | `curar-fontes` e `redigir-edicao`, com critérios e tom em arquivos de apoio separados. Checkpoint em voz alta: por que isso ficou fora do `SKILL.md`? |
-| 16–20 | Colocar as fontes | 4 a 6 URLs da própria área. Momento mais individual — é o que faz o mesmo agente produzir edições diferentes. |
-| 20–26 | Acionar e observar | "Gere a edição desta semana." Janela declarada, um subagente por fonte em paralelo, consolidação. Nomear o Bloco 3 enquanto acontece na tela. |
-| 26–29 | Verificar | Abrir dois links, conferir data e resumo. Recolher casos de item errado sem corrigir. |
-| 29–30 | Fechar | `/context` final contra a linha de base, uma pergunta de debrief. |
-
-A troca de tom via `references/`, que fecharia o conceito com mais força, virou item de "se sobrar tempo" — a construção do zero consumiu esse espaço.
+Em uma linha: em pasta vazia, o aluno pede ao agente que escreva o `CLAUDE.md` do orquestrador, as duas skills e os arquivos de `references/`; coloca as próprias fontes; aciona sob demanda; verifica os links; e troca o tom pelo arquivo de apoio sem tocar em nenhuma skill.
 
 **Conceitos exercitados:** janela de contexto, sessão, contexto persistente, skills, references, subagents, orquestrador, tool use e verificação. Ficam de fora, como observação e não como exercício: modelos, thinking/effort e permissões.
 
