@@ -128,19 +128,22 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 ## Bloco P — Prática guiada (30 min)
 
-**Prática:** newsletter semanal da área do aluno. Um agente acionado sob demanda — sem agendamento — que busca o que saiu na semana anterior nas fontes que o próprio aluno listou e gera uma edição em Markdown.
+**Prática:** newsletter semanal da área do aluno, construída **do zero**. Ninguém clona kit: o aluno abre o Claude Code em pasta vazia e pede ao próprio agente que escreva o `CLAUDE.md` do orquestrador, as skills e os arquivos de `references/`. Depois coloca as fontes dele, aciona e verifica. Agente sob demanda, sem agendamento.
 
-Kit pronto em [`pratica/`](../pratica/). Plano completo do instrutor, com o que dizer em cada momento, plano de degradação e checklist de preparação: [pratica-guiada.md](pratica-guiada.md).
+Folha de prompts do aluno: [folha-do-aluno.md](folha-do-aluno.md). Plano do instrutor, com o que dizer em cada momento, degradação e checklist: [pratica-guiada.md](pratica-guiada.md). Resultado esperado, só para o instrutor: [`gabarito/`](../gabarito/).
 
 | Min | Etapa | Detalhe |
 |---|---|---|
-| 0–5 | Setup e verificação | Clone do kit, `cd pratica`, `claude`. Quem falhar entra em dupla na hora. Instruções de instalação enviadas antes da sessão; aqui é só verificação. |
-| 5–7 | Linha de base | `/context` e anotar o número. Ver o que já ocupa a janela sem ninguém ter pedido nada: system prompt, `CLAUDE.md`, descrições de skills. Amarra o Bloco 2. |
-| 7–12 | Configurar as fontes | Preencher `references/fontes.md` com 4 a 6 fontes da própria área. Momento mais individual da prática — é o que faz a mesma skill produzir edições diferentes. |
-| 12–20 | Acionar o agente | "Gere a edição desta semana." O orquestrador calcula a janela, abre um subagente por fonte em paralelo, consolida e manda redigir. Enquanto roda, nomear o que está acontecendo na tela. |
-| 20–24 | Verificar | Abrir dois links da edição, conferir data e resumo. Recolher os casos de item errado ou sem link — material do debrief. Não corrigir na hora. |
-| 24–27 | Mudar o tom | Editar `references/tom.md` e pedir a reescrita. Nenhum `SKILL.md` foi tocado. É aqui que o conceito de reference fecha. |
-| 27–30 | Debrief | O que surpreendeu, o que você usa amanhã. `/context` final e onde consultar a documentação. |
+| 0–3 | Setup | `mkdir newsletter && cd newsletter && claude`. Quem falhar entra em dupla na hora. Instalação enviada antes da sessão. |
+| 3–5 | Linha de base | `/context` e anotar o número. Ver o que já ocupa a janela sem ninguém ter pedido nada. Amarra o Bloco 2. |
+| 5–10 | Criar o orquestrador | O aluno descreve o laço em linguagem natural e o agente escreve o `CLAUDE.md`. Depois **lê o arquivo gerado**. Descoberta central: as instruções do agente são Markdown que ele mesmo sabe escrever. |
+| 10–16 | Criar as skills | `curar-fontes` e `redigir-edicao`, com critérios e tom em arquivos de apoio separados. Checkpoint em voz alta: por que isso ficou fora do `SKILL.md`? |
+| 16–20 | Colocar as fontes | 4 a 6 URLs da própria área. Momento mais individual — é o que faz o mesmo agente produzir edições diferentes. |
+| 20–26 | Acionar e observar | "Gere a edição desta semana." Janela declarada, um subagente por fonte em paralelo, consolidação. Nomear o Bloco 3 enquanto acontece na tela. |
+| 26–29 | Verificar | Abrir dois links, conferir data e resumo. Recolher casos de item errado sem corrigir. |
+| 29–30 | Fechar | `/context` final contra a linha de base, uma pergunta de debrief. |
+
+A troca de tom via `references/`, que fecharia o conceito com mais força, virou item de "se sobrar tempo" — a construção do zero consumiu esse espaço.
 
 **Conceitos exercitados:** janela de contexto, sessão, contexto persistente, skills, references, subagents, orquestrador, tool use e verificação. Ficam de fora, como observação e não como exercício: modelos, thinking/effort e permissões.
 
