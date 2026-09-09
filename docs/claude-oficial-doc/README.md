@@ -16,8 +16,8 @@ Nomes de arquivo: caminho da URL com `/` trocado por `--`.
 
 | Conceito | Arquivos |
 |---|---|
-| sessão | `code/sessions-and-context.md`, `code/agent-sdk--sessions.md` |
-| janela de contexto | `code/costs.md`, `code/sessions-and-context.md` |
+| sessão | `code/sessions.md`, `code/agent-sdk--sessions.md` |
+| janela de contexto | `code/costs.md`, `code/sessions.md` |
 | modelos | `code/model-config.md`, `chat/*choose-a-claude-plan*` |
 | thinking / effort | `code/model-config.md`, `code/settings.md` |
 | skills | `chat/skills--overview.md`, `chat/skills--how-to.md`, `code/skills.md` |
