@@ -10,19 +10,25 @@ O deck é código. Ninguém edita o `.pptx` à mão: edita-se o conteúdo em Mar
 ## Fluxo
 
 1. Edite o conteúdo em `slides/conteudo/<aula>.md`, seguindo a gramática abaixo.
-2. Reconstrua:
+2. Reconstrua. O comando gera o `.pptx` e, em seguida, o PDF de conferência:
 
    ```bash
    python slides/scripts/build_deck.py slides/conteudo/<aula>.md
    ```
 
-3. Confira antes de entregar:
+3. Rode o lint estrutural:
 
    ```bash
    python slides/scripts/conferir.py slides/saida/<aula>.pptx
    ```
 
-   O resultado precisa terminar com `0 alerta(s)`. Alerta de texto denso significa dividir o slide, não reduzir a fonte.
+   Precisa terminar com `0 alerta(s)`. Alerta de texto denso significa dividir o slide, não reduzir a fonte.
+
+4. **Leia o PDF em `slides/build/<aula>.pdf` antes de dar o trabalho por concluído.**
+
+   O lint é cego para o que só aparece renderizado: marcação vazando como texto literal, rótulo estourando a caixa de uma figura, seta cruzando legenda, figura desalinhada. Esses defeitos só se veem olhando a página.
+
+   Se a conversão falhar com `Call was rejected by callee`, o PowerPoint está ocupado: feche o programa e repita. `--sem-pdf` pula a etapa, e só deve ser usado quando não há PowerPoint na máquina.
 
 ## Gramática do conteúdo
 
@@ -63,3 +69,5 @@ Detalhes de paleta, tipografia, regras de citação de fonte e critérios de qua
 **Cor e tipografia moram em `slides/scripts/estilo.py`.** Não escreva cor literal em figura nem no construtor.
 
 **O `.pptx` é artefato gerado.** Nunca edite o arquivo de saída: a próxima reconstrução descarta a alteração.
+
+**Entregar sem ter olhado o PDF não conta como entregar.** Gerar sem conferir já produziu marcação literal em slide e texto estourando figura.

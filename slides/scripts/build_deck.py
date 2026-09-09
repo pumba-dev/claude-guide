@@ -123,17 +123,32 @@ def caixa_texto(slide, x, y, w, h, alinhamento=PP_ALIGN.LEFT, ancora=MSO_ANCHOR.
 
 
 def escreve(par, texto, *, fonte, tamanho, cor, negrito=False, italico=False, espaco_antes=0, espaco_depois=0, entrelinha=1.0):
+    """Escreve um parágrafo.
+
+    Trechos entre `**` viram negrito; trechos entre crases viram monoespaçado,
+    ligeiramente menor para compensar a largura da fonte de código.
+    """
     par.space_before = Pt(espaco_antes)
     par.space_after = Pt(espaco_depois)
     par.line_spacing = entrelinha
-    run = par.add_run()
-    run.text = texto
-    run.font.name = fonte
-    run.font.size = Pt(tamanho)
-    run.font.color.rgb = rgb(cor)
-    run.font.bold = negrito
-    run.font.italic = italico
-    return run
+    ultimo = None
+    for parte in re.split(r"(\*\*.+?\*\*|`[^`]+`)", texto):
+        if not parte:
+            continue
+        em_negrito, mono = negrito, False
+        if parte.startswith("**") and parte.endswith("**"):
+            parte, em_negrito = parte[2:-2], True
+        elif parte.startswith("`") and parte.endswith("`"):
+            parte, mono = parte[1:-1], True
+        run = par.add_run()
+        run.text = parte
+        run.font.name = E.FONTE_MONO if mono else fonte
+        run.font.size = Pt(tamanho * 0.92 if mono else tamanho)
+        run.font.color.rgb = rgb(cor)
+        run.font.bold = em_negrito
+        run.font.italic = italico
+        ultimo = run
+    return ultimo
 
 
 def linha_horizontal(slide, x, y, w, cor, espessura=1.25):
@@ -278,7 +293,9 @@ def insere_figura(slide, nome, x, y, largura_max, altura_max, fonte_credito=""):
     topo = y + (altura_max - altura) / 2
     slide.shapes.add_picture(str(caminho), Inches(esquerda), Inches(topo), Inches(largura), Inches(altura))
     if fonte_credito:
-        tf = caixa_texto(slide, x, y + altura_max + 0.02, largura_max, 0.3)
+        # Crédito logo abaixo da imagem, não no fim da área reservada: colado
+        # na figura, é lido como legenda; solto, parece rodapé.
+        tf = caixa_texto(slide, esquerda, min(topo + altura + 0.06, E.RODAPE_Y - 0.34), largura, 0.3)
         escreve(tf.paragraphs[0], fonte_credito, fonte=E.FONTE_CORPO, tamanho=E.PT_LEGENDA, cor=E.TEXTO_FRACO, italico=True)
 
 
@@ -289,7 +306,7 @@ def desenha_conteudo(slide, s: Slide):
     altura_util = E.RODAPE_Y - y - 0.45
 
     if s.figura and s.bullets:
-        largura_texto = util * 0.38
+        largura_texto = util * 0.42
         desenha_bullets(slide, s, E.MARGEM, y, largura_texto - 0.25)
         insere_figura(slide, s.figura, E.MARGEM + largura_texto, y, util - largura_texto, altura_util, s.fonte)
     elif s.figura:
@@ -348,16 +365,55 @@ def monta(slides: list[Slide], destino: Path):
     return len(slides)
 
 
+def exporta_pdf(pptx: Path) -> Path | None:
+    """Converte para PDF com o PowerPoint instalado. O PDF é o artefato de
+    conferência: é nele que se revisa o deck página a página, sem depender de
+    abrir o PowerPoint."""
+    import subprocess
+
+    script = Path(__file__).parent / "exportar_pdf.ps1"
+    pdf = RAIZ / "build" / f"{pptx.stem}.pdf"
+    resultado = subprocess.run(
+        [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            str(script),
+            "-Pptx",
+            str(pptx),
+            "-Pdf",
+            str(pdf),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=600,
+    )
+    if resultado.returncode != 0 or not pdf.exists():
+        print("aviso: não foi possível gerar o PDF de conferência.")
+        detalhe = (resultado.stderr or resultado.stdout).strip().splitlines()
+        if detalhe:
+            print(f"       {detalhe[0]}")
+        print("       Feche o PowerPoint, se estiver aberto, e rode de novo.")
+        return None
+    return pdf
+
+
 def main(argv):
     if not argv:
-        raise SystemExit("uso: python slides/scripts/build_deck.py <arquivo-de-conteudo.md>")
-    origem = Path(argv[0])
+        raise SystemExit("uso: python slides/scripts/build_deck.py <arquivo-de-conteudo.md> [--sem-pdf]")
+    sem_pdf = "--sem-pdf" in argv
+    origem = Path([a for a in argv if not a.startswith("--")][0])
     if not origem.exists():
         raise SystemExit(f"conteúdo não encontrado: {origem}")
     slides = parse(origem.read_text(encoding="utf-8"))
     destino = DIR_SAIDA / f"{origem.stem}.pptx"
     total = monta(slides, destino)
     print(f"{total} slides gerados em {destino}")
+    if not sem_pdf:
+        pdf = exporta_pdf(destino)
+        if pdf:
+            print(f"PDF de conferência em {pdf}")
 
 
 if __name__ == "__main__":

@@ -184,8 +184,8 @@ def fig_discriminativo_generativo():
 
     ax = axes[1]
     _caixa(ax, 0.6, 3.6, 3.0, 1.1, "contexto\n(tokens anteriores)", E.FUNDO_CAIXA, E.TEXTO, 10.5)
-    _seta(ax, (3.8, 4.15), (5.6, 4.15), cor=E.ACENTO)
-    _caixa(ax, 5.8, 3.6, 3.4, 1.1, "P(próximo token | contexto)", E.ACENTO, fonte=10.5, negrito=True)
+    _seta(ax, (3.8, 4.15), (5.35, 4.15), cor=E.ACENTO)
+    _caixa(ax, 5.5, 3.6, 3.9, 1.1, "P(próximo token\n| contexto)", E.ACENTO, fonte=11, negrito=True)
     ax.text(
         5.0,
         2.3,
@@ -588,7 +588,7 @@ def fig_skill_references():
     ax.text(1.9, 3.35, "custo fixo, todo turno", ha="center", fontsize=9.5, color=E.TEXTO_FRACO)
 
     _caixa(ax, 4.1, 3.6, 3.0, 0.95, "descrição da skill\nsempre em contexto", E.CAMADA_C, fonte=11, negrito=True)
-    ax.text(5.6, 3.35, "poucas centenas de tokens", ha="center", fontsize=9.5, color=E.TEXTO_FRACO)
+    ax.text(4.15, 3.35, "poucas centenas de tokens", ha="left", fontsize=9.5, color=E.TEXTO_FRACO)
 
     _caixa(ax, 4.1, 1.95, 3.0, 0.85, "SKILL.md\ncarrega ao ser usada", E.CAMADA_C, fonte=11, alpha=0.75)
     _seta(ax, (5.6, 3.55), (5.6, 2.85), cor=E.CAMADA_C)
@@ -752,7 +752,7 @@ def gerar(nomes=None):
             raise SystemExit(f"figura desconhecida: {nome}\ndisponíveis: {', '.join(sorted(FIGURAS))}")
         fig = FIGURAS[nome]()
         destino = SAIDA / f"{nome}.png"
-        fig.savefig(destino, dpi=E.FIG_DPI, bbox_inches="tight", pad_inches=0.18)
+        fig.savefig(destino, dpi=E.FIG_DPI, bbox_inches="tight", pad_inches=0.18, transparent=True)
         plt.close(fig)
         print(f"gerada  {destino.relative_to(SAIDA.parents[2])}")
 

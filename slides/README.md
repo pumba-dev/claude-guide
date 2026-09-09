@@ -8,9 +8,12 @@ slides/
 ├── scripts/
 │   ├── estilo.py           <- paleta, tipografia, medidas, autor
 │   ├── figuras.py          <- as figuras, geradas com matplotlib
-│   ├── build_deck.py       <- monta o .pptx
-│   └── conferir.py         <- confere densidade, margens e notas
-├── build/figuras/          <- PNGs gerados
+│   ├── build_deck.py       <- monta o .pptx e exporta o PDF
+│   ├── conferir.py         <- confere densidade, margens e notas
+│   └── exportar_pdf.ps1    <- converte para PDF, via PowerPoint
+├── build/
+│   ├── figuras/            <- PNGs gerados
+│   └── aula-1.pdf          <- PDF de conferência
 └── saida/aula-1.pptx       <- entregável
 ```
 
@@ -20,11 +23,25 @@ slides/
 pip install python-pptx matplotlib pillow
 
 python slides/scripts/figuras.py                        # gera as figuras
-python slides/scripts/build_deck.py slides/conteudo/aula-1.md
-python slides/scripts/conferir.py slides/saida/aula-1.pptx
+python slides/scripts/build_deck.py slides/conteudo/aula-1.md   # .pptx + .pdf
+python slides/scripts/conferir.py slides/saida/aula-1.pptx      # lint estrutural
 ```
 
-`build_deck.py` gera sozinho qualquer figura que esteja faltando.
+`build_deck.py` gera sozinho qualquer figura que esteja faltando e, ao final,
+exporta `build/aula-1.pdf` usando o PowerPoint instalado. Use `--sem-pdf` para pular.
+
+## Por que o PDF importa
+
+O lint estrutural pega texto demais e figura fora da margem, mas é cego para o
+que só aparece renderizado: marcação que vazou como texto literal, rótulo
+estourando a caixa de uma figura, seta cruzando legenda. O PDF é o que permite
+**ver** o slide e corrigir isso antes da sala.
+
+Três defeitos reais foram encontrados exatamente assim, e nenhum deles aparecia
+no lint. Portanto: revisar o PDF é parte do processo, não etapa opcional.
+
+Se a conversão falhar com `Call was rejected by callee`, o PowerPoint está
+ocupado. Feche o programa e rode de novo.
 
 A conferência precisa terminar em `0 alerta(s)`. Alerta de texto denso se resolve dividindo o slide, nunca diminuindo a fonte.
 
