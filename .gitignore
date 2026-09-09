@@ -1,0 +1,3 @@
+slides/build/
+__pycache__/
+*.pyc
