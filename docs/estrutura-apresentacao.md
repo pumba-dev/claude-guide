@@ -75,6 +75,10 @@ Fonte de consulta para todos: [claude-oficial-doc/](claude-oficial-doc/).
 | 6 — Fechamento | 2 min | Fechamento e ponte para a prática. |
 | P — Prática guiada | 30 min | 5 min de setup e verificação de ambiente; 10 min de exercício no Chat focado em sessão e janela de contexto; 12 min de exercício no Code sobre um repositório de exemplo, exercitando references, skills e subagents, com plan mode como passo visível; 3 min de debrief. |
 
+## Roteiro detalhado
+
+O detalhamento minutado de cada bloco, com o que mostrar e a âncora prática de cada um, está em [roteiro-blocos.md](roteiro-blocos.md).
+
 ## Requisito: âncora prática
 
 Cada bloco de 1 a 5 **deve terminar com uma âncora prática**: uma frase de consequência imediata para o dia a dia do aluno, do tipo "por isso conversa longa degrada" ou "por isso vale abrir sessão nova".
