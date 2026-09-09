@@ -128,14 +128,21 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 ## Bloco P — Prática guiada (30 min)
 
+**Prática:** newsletter semanal da área do aluno. Um agente acionado sob demanda — sem agendamento — que busca o que saiu na semana anterior nas fontes que o próprio aluno listou e gera uma edição em Markdown.
+
+Kit pronto em [`pratica/`](../pratica/). Plano completo do instrutor, com o que dizer em cada momento, plano de degradação e checklist de preparação: [pratica-guiada.md](pratica-guiada.md).
+
 | Min | Etapa | Detalhe |
 |---|---|---|
-| 0–5 | Setup e verificação | Login, acesso ao Chat, Claude Code instalado, repositório de exemplo clonado. Ter plano B: quem falhar no setup faz em dupla. Este é o maior risco operacional da apresentação. |
-| 5–15 | Exercício no Chat | Foco em **sessão** e **janela de contexto**. Sequência: (1) conversa longa deliberada até sentir a degradação; (2) abrir sessão nova com um enunciado bem escrito e comparar a qualidade; (3) criar um Project com contexto persistente e repetir. O aluno mede a diferença em vez de ouvir sobre ela. |
-| 15–27 | Exercício no Code | Foco em **references**, **skills** e **subagents** sobre um repositório de exemplo. Sequência: (1) abrir em plan mode e pedir explicação de um módulo, vendo o plano antes da ação; (2) escrever um `CLAUDE.md` mínimo; (3) usar uma skill pronta com `references/` e observar o que carrega e quando; (4) disparar um subagente para varrer o repositório e comparar o consumo de contexto. |
-| 27–30 | Debrief | Duas perguntas: o que surpreendeu, o que você vai usar amanhã. Fechar com onde consultar a documentação. |
+| 0–5 | Setup e verificação | Clone do kit, `cd pratica`, `claude`. Quem falhar entra em dupla na hora. Instruções de instalação enviadas antes da sessão; aqui é só verificação. |
+| 5–7 | Linha de base | `/context` e anotar o número. Ver o que já ocupa a janela sem ninguém ter pedido nada: system prompt, `CLAUDE.md`, descrições de skills. Amarra o Bloco 2. |
+| 7–12 | Configurar as fontes | Preencher `references/fontes.md` com 4 a 6 fontes da própria área. Momento mais individual da prática — é o que faz a mesma skill produzir edições diferentes. |
+| 12–20 | Acionar o agente | "Gere a edição desta semana." O orquestrador calcula a janela, abre um subagente por fonte em paralelo, consolida e manda redigir. Enquanto roda, nomear o que está acontecendo na tela. |
+| 20–24 | Verificar | Abrir dois links da edição, conferir data e resumo. Recolher os casos de item errado ou sem link — material do debrief. Não corrigir na hora. |
+| 24–27 | Mudar o tom | Editar `references/tom.md` e pedir a reescrita. Nenhum `SKILL.md` foi tocado. É aqui que o conceito de reference fecha. |
+| 27–30 | Debrief | O que surpreendeu, o que você usa amanhã. `/context` final e onde consultar a documentação. |
 
-**Pendente:** definir o repositório de exemplo. Requisitos: pequeno o bastante para ser lido em minutos, real o bastante para valer a pena, e **de domínio neutro** — legível por quem pesquisa redes ópticas, educação, saúde ou faz revisão bibliográfica, sem exigir conhecimento prévio de nenhum desses. O problema exercitado deve ser "entender código que não é meu", que é universal no laboratório.
+**Conceitos exercitados:** janela de contexto, sessão, contexto persistente, skills, references, subagents, orquestrador, tool use e verificação. Ficam de fora, como observação e não como exercício: modelos, thinking/effort e permissões.
 
 ---
 
