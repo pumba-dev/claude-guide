@@ -100,18 +100,20 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 ---
 
-## Bloco 5 — Aplicação em pesquisa de redes (5 min)
+## Bloco 5 — Aplicação em pesquisa em computação (5 min)
 
 **Objetivo:** o aluno vê os conceitos aplicados ao trabalho dele e sai com regras de conduta claras. Bloco denso: cortar exemplo antes de cortar regra.
 
+**Princípio de generalidade:** o laboratório tem projetos muito diferentes — redes ópticas elásticas, aplicações em educação e saúde, revisões bibliográficas. O bloco **não é organizado por domínio, e sim por tipo de trabalho**, porque as quatro atividades abaixo aparecem em todos eles. Cada atividade é apresentada com um exemplo neutro e um segundo exemplo tirado de um domínio diferente, para que ninguém precise traduzir mentalmente do domínio alheio para o seu.
+
 | Min | Tópico | Tratamento |
 |---|---|---|
-| 0–1.5 | Quatro usos diretos | Código de simulação herdado, ou seja, entender o que o aluno anterior escreveu; análise de capturas e logs; reprodutibilidade de experimentos, com script e ambiente registrados; apoio à escrita. Um exemplo curto cada, sem demo. |
-| 1.5–3 | Permissões e plan mode | Um agente com acesso ao repositório edita arquivos e roda comandos. Modos de permissão definem o portão: pedir aprovação, aceitar edições, ou plan mode — o agente **planeja e mostra antes de agir**. Regra: repositório de terceiro ou dado de coleta começa em plan mode. |
-| 3–4 | Dados sensíveis | O que não vai para o modelo: captura com dado identificável, credencial, dado sob termo de consentimento. Citar a política oficial de privacidade e uso de dados em vez de opinar. |
-| 4–5 | Verificação e honestidade acadêmica | Saída plausível não é saída correta — o Bloco 1 já provou. O que o modelo produz é rascunho até você rodar, conferir e reproduzir. Declarar uso conforme a norma do programa e do veículo. Nada assinado por você entra sem você ter verificado. |
+| 0–1.5 | Quatro tipos de trabalho, não quatro domínios | (1) **Entender artefato herdado**: simulador que o aluno anterior deixou, pipeline de dados, protótipo de aplicação — o problema é sempre código sem quem o explique. (2) **Analisar resultado experimental**: saída de simulação, log, captura, planilha de coleta, resposta de questionário — o problema é sempre volume acima da leitura manual. (3) **Levantar e organizar literatura**: triagem de artigos, extração de critérios, montagem de tabela comparativa em revisão sistemática — com a ressalva de que o modelo **não é fonte bibliográfica**, e sim ferramenta de organização sobre textos que você forneceu. (4) **Apoiar a escrita**: estrutura, clareza, revisão de argumento. Um exemplo curto cada, sem demo. |
+| 1.5–3 | Permissões e plan mode | Um agente com acesso ao repositório edita arquivos e roda comandos. Modos de permissão definem o portão: pedir aprovação, aceitar edições, ou plan mode — o agente **planeja e mostra antes de agir**. Regra: repositório de terceiro, base de coleta ou qualquer artefato que você não pode recriar começa em plan mode. |
+| 3–4 | Dados sensíveis | Duas categorias distintas. **Dado técnico:** credencial, chave, endereço de infraestrutura, captura com identificador de rede. **Dado de pessoa:** o que aparece em projeto de educação e de saúde — registro de aluno, prontuário, resposta de questionário, qualquer coisa sob TCLE ou aprovação de comitê de ética. Para a segunda categoria a régua não é o que a ferramenta permite, é o que o protocolo de pesquisa e a LGPD permitem: se o consentimento não previu processamento por serviço de terceiro, o dado não sai da máquina. Citar a política oficial de privacidade e uso de dados em vez de opinar. |
+| 4–5 | Verificação e honestidade acadêmica | Saída plausível não é saída correta — o Bloco 1 já provou. O que o modelo produz é rascunho até você rodar, conferir e reproduzir. Duas armadilhas específicas: referência bibliográfica inventada com aparência perfeita, e resultado numérico produzido sem executar nada. Declarar uso conforme a norma do programa e do veículo. Nada assinado por você entra sem você ter verificado. |
 
-**Âncora prática:** *"O agente acelera a parte mecânica e não assume nenhuma responsabilidade. A assinatura no paper é sua, então a verificação também é."*
+**Âncora prática:** *"O agente acelera a parte mecânica e não assume nenhuma responsabilidade. A assinatura no paper é sua, então a verificação também é — e o dado que saiu do seu computador não volta."*
 
 ---
 
@@ -133,7 +135,7 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 | 15–27 | Exercício no Code | Foco em **references**, **skills** e **subagents** sobre um repositório de exemplo. Sequência: (1) abrir em plan mode e pedir explicação de um módulo, vendo o plano antes da ação; (2) escrever um `CLAUDE.md` mínimo; (3) usar uma skill pronta com `references/` e observar o que carrega e quando; (4) disparar um subagente para varrer o repositório e comparar o consumo de contexto. |
 | 27–30 | Debrief | Duas perguntas: o que surpreendeu, o que você vai usar amanhã. Fechar com onde consultar a documentação. |
 
-**Pendente:** definir o repositório de exemplo. Requisitos: pequeno o bastante para ser lido em minutos, real o bastante para valer a pena, e de domínio de redes para o público reconhecer o problema.
+**Pendente:** definir o repositório de exemplo. Requisitos: pequeno o bastante para ser lido em minutos, real o bastante para valer a pena, e **de domínio neutro** — legível por quem pesquisa redes ópticas, educação, saúde ou faz revisão bibliográfica, sem exigir conhecimento prévio de nenhum desses. O problema exercitado deve ser "entender código que não é meu", que é universal no laboratório.
 
 ---
 
