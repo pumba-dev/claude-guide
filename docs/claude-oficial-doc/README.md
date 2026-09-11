@@ -16,6 +16,7 @@ Nomes de arquivo: caminho da URL com `/` trocado por `--`.
 
 | Conceito | Arquivos |
 |---|---|
+| harness | `code/glossary.md` (verbete "Agentic harness"), `code/how-claude-code-works.md` |
 | janela de contexto | `code/context-window.md`, `code/costs.md` |
 | sessão | `code/sessions.md`, `code/agent-sdk--sessions.md` |
 | contexto persistente | `code/memory.md`, `chat/11473015-retrieval-augmented-generation-rag-for-projects.md`, `chat/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context.md` |

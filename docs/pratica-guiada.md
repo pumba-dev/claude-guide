@@ -36,12 +36,13 @@ Checklist para circular pela sala:
 
 Se as cinco aparecerem, funcionou — mesmo com redação diferente do gabarito.
 
-## Cobertura dos doze conceitos
+## Cobertura dos treze conceitos
 
-Com 60 minutos, a prática exercita **todos**. Era o que faltava no formato de 30.
+Com 60 minutos, a prática exercita **todos os treze**. Era o que faltava no formato de 30.
 
 | Conceito | Onde aparece |
 |---|---|
+| harness | A prática inteira acontece dentro dele. Fica visível no `/context` e ao ver os subagentes sendo abertos |
 | janela de contexto | `/context` no passo 0 e no passo 7 |
 | sessão | Uma sessão só do começo ao fim; custo acumulado visível |
 | contexto persistente | O aluno **escreve** o `CLAUDE.md` e vê o comportamento mudar |
@@ -59,7 +60,7 @@ Com 60 minutos, a prática exercita **todos**. Era o que faltava no formato de 3
 
 | Min | Etapa | O que acontece |
 |---|---|---|
-| 0–4 | Retomada | Pirâmide dos doze conceitos da Aula 1, e o que vai ser construído hoje. Mostrar uma edição pronta — o destino, em 30 segundos. |
+| 0–4 | Retomada | Pirâmide dos treze conceitos da Aula 1, e o que vai ser construído hoje. Mostrar uma edição pronta — o destino, em 30 segundos. |
 | 4–8 | Setup e linha de base | `mkdir newsletter && cd newsletter && claude`, depois `/context` e anotar. Quem falhar no setup entra em dupla **na hora**. |
 | 8–16 | Orquestrador em plan mode | O aluno entra em plan mode e cola o prompt do passo 1. Lê o plano, aprova, lê o arquivo. Circule perguntando: "isso manda ele ler as fontes ou delegar?" |
 | 16–26 | Skills e references | Prompt do passo 2. Ao final, a pergunta em voz alta: por que os critérios e o tom ficaram fora do `SKILL.md`? Deixe alguém responder. |

@@ -10,7 +10,7 @@
 - Ao final das duas aulas você abre o Claude no seu próprio projeto e sabe o que acontece em cada camada
 - Aula 1: por que uma LLM se comporta como se comporta
 - Aula 2: você constrói um agente do zero, com orquestrador, skills e material de apoio
-- Doze conceitos operacionais. Toda a teoria existe para sustentá-los, não o contrário
+- Treze conceitos operacionais. Toda a teoria existe para sustentá-los, não o contrário
 > "Vocês já sabem ler um paper e já sabem programar. O que falta é saber o que acontece entre apertar Enter e a resposta aparecer. Nesta aula a gente abre essa caixa. Na próxima, vocês operam ela."
 
 ---
@@ -19,7 +19,7 @@
 ### Cada conceito depende do anterior. Por isso começamos por baixo
 :fig piramide
 :fonte Elaboração própria.
-> Este slide reaparece no início de cada bloco, com o item da vez destacado. É a barra de progresso conceitual da aula.
+> Este slide reaparece no início de cada bloco, com o item da vez destacado. É a barra de progresso conceitual da aula. Adiantar uma frase: tudo isto acontece dentro de uma aplicação, o harness, que é o primeiro assunto do próximo bloco.
 
 ---
 
@@ -80,7 +80,7 @@
 - **Ausência de estado** — cada requisição começa do zero
   - as três decorrem do mecanismo que acabamos de ver
   - nenhuma delas é bug a ser corrigido na próxima versão
-> Fecha o bloco. Cada uma volta adiante: alucinação no Bloco 5, data de corte no tool use, ausência de estado já no Bloco 2.
+> Fecha o bloco. Cada uma volta adiante: alucinação no Bloco 5, data de corte no tool use, ausência de estado já no próximo slide. Deixar a pergunta no ar antes de virar: se o modelo não guarda nada e não executa nada, quem faz o resto?
 
 ---
 
@@ -95,6 +95,23 @@
 ---
 
 :bloco 2 · Anatomia da requisição
+# Você não conversa com o modelo
+:fig harness
+:fonte Elaboração própria a partir do glossário da documentação oficial do Claude Code (set. 2026).
+> A pergunta que fechou o Bloco 1: se o modelo não guarda estado e não executa nada, quem faz o resto? Esta figura é a resposta. O modelo é uma função de texto para texto; a sessão, a memória, os arquivos e as ferramentas são todos do harness. Termo oficial, não apelido: "Claude Code is the harness; Claude is the model inside it".
+
+---
+
+# O que o harness faz por você
+- **Monta a requisição** — injeta system prompt, `CLAUDE.md` e descrições de skills antes do seu texto
+- **Mantém a sessão** — reenvia o histórico a cada turno, porque o modelo não guarda nada
+- **Executa as ferramentas** — o modelo pede, o harness faz e devolve o resultado
+- **Aplica o portão** — permissões e plan mode ficam fora do componente estocástico
+- **Administra a janela** — conta, compacta e abre subagentes quando falta espaço
+> Cada linha aqui é um bloco desta aula. Dizer isso em voz alta: o resto da aula é detalhar o que esta caixa faz. Notar que o portão de permissões é do harness — é justamente por isso que ele é confiável.
+
+---
+
 # O que é enviado a cada turno
 :fig orcamento-janela
 :fonte Elaboração própria a partir do simulador de janela de contexto da documentação oficial do Claude Code (set. 2026).
@@ -165,10 +182,10 @@
 :bloco 3 · Do sistema ao agente
 # Tool use, apresentado como protocolo
 - O servidor expõe ferramentas com nome, descrição e schema
-- O cliente injeta essa lista no contexto do modelo
-- O modelo responde **pedindo** uma chamada; o cliente executa e devolve o resultado
+- O harness injeta essa lista no contexto do modelo
+- O modelo responde **pedindo** uma chamada; o harness executa e devolve o resultado
 - MCP é o protocolo aberto que padroniza esse contrato
-  - a mesma ferramenta serve a qualquer cliente que fale o protocolo
+  - a mesma ferramenta serve a qualquer harness que fale o protocolo
 > "O modelo nunca executa nada — ele pede." Para este público, é a frase que destrava o bloco inteiro.
 
 ---
@@ -176,7 +193,7 @@
 # O laço
 :fig laco-agente
 :fonte Elaboração própria.
-> Mapear cada etapa no que acabou de ser descrito. O laço encerra quando o modelo devolve texto em vez de pedir ferramenta.
+> Mapear cada etapa no que acabou de ser descrito. Quem percorre este laço é o harness: ele é que chama o modelo, executa o que foi pedido e decide se roda outra volta. O laço encerra quando o modelo devolve texto em vez de pedir ferramenta.
 
 ---
 
@@ -218,11 +235,12 @@
 # Três portas para o mesmo prédio
 :fig tres-produtos
 :fonte Elaboração própria.
-> Nomes de modelo mudam; o critério capacidade × latência × custo não. Dizer isso em voz alta protege o material do tempo.
+> Retomar o Bloco 2 com uma frase: Chat, Cowork e Code são três harnesses sobre o mesmo modelo. O que muda entre eles é o que o harness faz por você, não a inteligência por trás. E nomes de modelo mudam; o critério capacidade × latência × custo não — dizer isso em voz alta protege o material do tempo.
 
 ---
 
 # Onde cada conceito aparece — Chat e Cowork
+- Os dois são harnesses: mesma base, ambientes diferentes
 - **Chat** — a porta de entrada do pesquisador
   - Projects e memória fazem o papel de contexto persistente
   - connectors são tool use com outra roupa
@@ -273,7 +291,7 @@
 
 # Permissões: o portão do laço
 - Um agente com acesso ao repositório edita arquivos e executa comandos
-- Modos de permissão definem o portão: pedir aprovação, aceitar edições, ou planejar antes de agir
+- O portão é do **harness**, não do modelo: pedir aprovação, aceitar edições, ou planejar antes de agir
 - **Plan mode**: o agente mostra o plano e espera. Você lê antes de qualquer escrita
 - Regra prática: repositório de terceiro, base de coleta ou artefato que você não pode recriar começa em plan mode
 > Vocês vão usar plan mode na Aula 2, no primeiro passo.
@@ -328,7 +346,7 @@
 
 :bloco Referências
 # Referências
-- Documentação oficial do Claude Code — code.claude.com/docs
+- Documentação oficial do Claude Code — code.claude.com/docs, incluindo o glossário e "How Claude Code works", onde o harness é definido
 - Documentação de Agent Skills e do formato `SKILL.md`
 - Central de ajuda do Claude: Projects, memória, connectors e Cowork
 - Política de privacidade e de uso de dados da Anthropic

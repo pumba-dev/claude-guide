@@ -737,6 +737,95 @@ def fig_compaction():
     return fig
 
 
+# --- 12. Harness: a aplicação em volta do modelo ----------------------------
+
+
+def fig_harness():
+    """Quem faz o trabalho. O modelo é uma função de texto para texto."""
+    fig, ax = plt.subplots(figsize=(11.4, 5.0))
+    ax.set_xlim(0, 12.8)
+    ax.set_ylim(0, 5.4)
+    _limpa(ax)
+
+    # Você
+    _caixa(ax, 0.25, 2.35, 1.95, 1.5, "", E.FUNDO_CAIXA)
+    ax.text(1.22, 3.5, "você", ha="center", fontsize=12.5, color=E.TEXTO, weight="bold", zorder=3)
+    ax.text(
+        1.22,
+        2.95,
+        "prompt\narquivos\ncomandos",
+        ha="center",
+        va="center",
+        fontsize=9.5,
+        color=E.TEXTO_FRACO,
+        linespacing=1.5,
+        zorder=3,
+    )
+
+    # Harness
+    _caixa(ax, 2.9, 1.15, 5.3, 3.6, "", E.ACENTO)
+    ax.text(5.55, 4.35, "harness", ha="center", fontsize=14, color=E.TEXTO_NEGATIVO, weight="bold", zorder=3)
+    ax.text(
+        5.55,
+        4.05,
+        "Claude Code, Chat, Cowork",
+        ha="center",
+        fontsize=9.5,
+        color=E.TEXTO_NEGATIVO,
+        alpha=0.85,
+        zorder=3,
+    )
+    tarefas = [
+        "injeta system prompt, CLAUDE.md e skills",
+        "reenvia o histórico a cada turno",
+        "executa a ferramenta que o modelo pediu",
+        "aplica o portão de permissões",
+        "gerencia a janela e compacta",
+        "abre subagentes e consolida o retorno",
+    ]
+    for i, tarefa in enumerate(tarefas):
+        y = 3.62 - i * 0.42
+        ax.text(3.2, y, "·", fontsize=13, color=E.TEXTO_NEGATIVO, va="center", zorder=3)
+        ax.text(3.45, y, tarefa, fontsize=9.8, color=E.TEXTO_NEGATIVO, va="center", zorder=3)
+
+    # Modelo
+    _caixa(ax, 9.5, 2.35, 2.9, 1.5, "", E.NEUTRO)
+    ax.text(10.95, 3.5, "modelo", ha="center", fontsize=12.5, color=E.TEXTO, weight="bold", zorder=3)
+    ax.text(
+        10.95,
+        2.95,
+        "recebe texto,\ndevolve texto.\nMais nada.",
+        ha="center",
+        va="center",
+        fontsize=9.8,
+        color=E.TEXTO,
+        linespacing=1.5,
+        zorder=3,
+    )
+
+    _seta(ax, (2.25, 3.35), (2.85, 3.35), cor=E.TEXTO_FRACO, lw=1.6)
+    _seta(ax, (8.3, 3.35), (9.45, 3.35), cor=E.ACENTO, lw=1.6)
+    _seta(ax, (9.45, 2.65), (8.3, 2.65), cor=E.TEXTO_FRACO, lw=1.6)
+    ax.text(8.87, 3.52, "requisição", ha="center", fontsize=9, color=E.ACENTO)
+    ax.text(8.87, 2.28, "resposta", ha="center", fontsize=9, color=E.TEXTO_FRACO)
+
+    ax.text(
+        0.25,
+        0.6,
+        "Você nunca fala com o modelo: fala com o harness, que fala com o modelo.",
+        fontsize=11.5,
+        color=E.TEXTO,
+    )
+    ax.text(
+        0.25,
+        0.2,
+        "A resposta que sai do modelo é texto. Quem executa qualquer coisa a partir dela é o harness.",
+        fontsize=10.5,
+        color=E.TEXTO_FRACO,
+    )
+    return fig
+
+
 FIGURAS = {
     nome[4:].replace("_", "-"): fn
     for nome, fn in sorted(globals().items())

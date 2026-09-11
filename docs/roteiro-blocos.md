@@ -1,6 +1,6 @@
 # Roteiro bloco a bloco — Aula 1
 
-Detalhamento dos blocos 0 a 6, que compõem a **Aula 1 (60 min, conceitual)**, definidos em [estrutura-apresentacao.md](estrutura-apresentacao.md). Tempos e ordem são os aprovados — não alterar sem consultar o autor.
+Detalhamento dos blocos 0 a 6, que compõem a **Aula 1 (~63 min, conceitual)**, definidos em [estrutura-apresentacao.md](estrutura-apresentacao.md). A ordem dos blocos é aprovada e não muda sem consultar o autor. Os tempos são estimativa de planejamento: dimensionam o conteúdo e orientam o que cortar sob pressão, mas o ritmo real acompanha a absorção da turma.
 
 A **Aula 2 (60 min, prática)** tem plano próprio em [pratica-guiada.md](pratica-guiada.md), com a folha de prompts do aluno em [folha-do-aluno.md](folha-do-aluno.md).
 
@@ -44,21 +44,22 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 ---
 
-## Bloco 2 — Anatomia de uma requisição (14 min)
+## Bloco 2 — Anatomia de uma requisição (17 min)
 
-**Objetivo:** o aluno entende o que é enviado a cada turno e passa a enxergar a janela como orçamento que ele administra.
+**Objetivo:** o aluno descobre que fala com uma aplicação, não com o modelo; entende o que é enviado a cada turno; e passa a enxergar a janela como orçamento que ele administra.
 
 | Min | Tópico | Tratamento |
 |---|---|---|
-| 0–3 | O que é enviado a cada turno | Desmontar uma requisição real: system prompt, memória, informação de ambiente, descrições de skills, `CLAUDE.md`, e só então o prompt do usuário. Números do simulador oficial: system prompt cerca de 4.200 tokens, `CLAUDE.md` de projeto cerca de 1.800, descrições de skills cerca de 450, ferramentas MCP diferidas cerca de 120. O prompt do aluno: cerca de 45. **A maior parte do que o modelo lê não foi escrita naquele turno.** |
-| 3–5.5 | Janela como orçamento finito | 200 mil tokens de padrão; 1 milhão em modelos com janela estendida. Não é quanto ele lembra, é quanto cabe **nesta** requisição. Cada leitura de arquivo debita: um arquivo médio custa entre 1.100 e 2.400 tokens. |
-| 5.5–8 | Sessão em modelo stateless | O modelo não guarda nada. A conversa existe porque o cliente reenvia todo o histórico a cada turno. Consequências em cascata: custo cresce, latência cresce, e a janela enche até o conteúdo relevante competir com ruído acumulado. |
-| 8–9.5 | Prompt caching | Contrapeso honesto: o reenvio existe, mas o prefixo repetido é cacheado e sai muito mais barato que a primeira vez. Sem isso a conta explodiria. Com isso, sessão longa é cara em janela, não tanto em dinheiro. |
-| 9.5–11 | Compaction | Quando a janela satura, o sistema resume a conversa e recomeça — o resumo fica em torno de 12% do que havia. É salva-vidas, não é grátis: o que foi resumido perdeu detalhe. Daí a decisão consciente entre compactar e abrir sessão nova. |
-| 11–12.5 | Contexto persistente | O que atravessa sessões: `CLAUDE.md` no Code, Projects e memória no Chat. Entra **sempre**, em toda requisição. Por isso é caro escrever demais nele — e é a alavanca de maior retorno quando bem escrito. |
-| 12.5–14 | Modelos, thinking e effort | Escolha de modelo: capacidade × latência × custo. Thinking: o modelo gera raciocínio antes da resposta, e esse raciocínio também são tokens. Effort (`low`, `medium`, `high`, `xhigh`, `max`; padrão `high`): quanto desse raciocínio investir. Regra prática: tarefa mecânica com effort alto é dinheiro e tempo jogados fora; tarefa de projeto com effort baixo é retrabalho. |
+| 0–3 | **Harness: você não conversa com o modelo** | Abrir o bloco respondendo à pergunta que o Bloco 1 deixou: se o modelo não guarda estado e não executa nada, quem faz o resto? O harness — Claude Code, Chat e Cowork são harnesses; o modelo está dentro deles. Ele monta a requisição, injeta system prompt, `CLAUDE.md` e descrições de skills, reenvia o histórico, executa a ferramenta que o modelo pediu, aplica permissões, compacta e abre subagentes. O modelo recebe texto e devolve texto; o resto é tudo harness. Termo oficial, não apelido: [code/glossary.md](claude-oficial-doc/code/glossary.md). |
+| 3–6 | O que é enviado a cada turno | Desmontar uma requisição real: system prompt, memória, informação de ambiente, descrições de skills, `CLAUDE.md`, e só então o prompt do usuário. Números do simulador oficial: system prompt cerca de 4.200 tokens, `CLAUDE.md` de projeto cerca de 1.800, descrições de skills cerca de 450, ferramentas MCP diferidas cerca de 120. O prompt do aluno: cerca de 45. **A maior parte do que o modelo lê não foi escrita naquele turno.** |
+| 6–8.5 | Janela como orçamento finito | 200 mil tokens de padrão; 1 milhão em modelos com janela estendida. Não é quanto ele lembra, é quanto cabe **nesta** requisição. Cada leitura de arquivo debita: um arquivo médio custa entre 1.100 e 2.400 tokens. |
+| 8.5–11 | Sessão em modelo stateless | O modelo não guarda nada. A conversa existe porque o harness reenvia todo o histórico a cada turno. Consequências em cascata: custo cresce, latência cresce, e a janela enche até o conteúdo relevante competir com ruído acumulado. |
+| 11–12.5 | Prompt caching | Contrapeso honesto: o reenvio existe, mas o prefixo repetido é cacheado e sai muito mais barato que a primeira vez. Sem isso a conta explodiria. Com isso, sessão longa é cara em janela, não tanto em dinheiro. |
+| 12.5–14 | Compaction | Quando a janela satura, o harness resume a conversa e recomeça — o resumo fica em torno de 12% do que havia. É salva-vidas, não é grátis: o que foi resumido perdeu detalhe. Daí a decisão consciente entre compactar e abrir sessão nova. |
+| 14–15.5 | Contexto persistente | O que atravessa sessões: `CLAUDE.md` no Code, Projects e memória no Chat. Entra **sempre**, em toda requisição. Por isso é caro escrever demais nele — e é a alavanca de maior retorno quando bem escrito. |
+| 15.5–17 | Modelos, thinking e effort | Escolha de modelo: capacidade × latência × custo. Thinking: o modelo gera raciocínio antes da resposta, e esse raciocínio também são tokens. Effort (`low`, `medium`, `high`, `xhigh`, `max`; padrão `high`): quanto desse raciocínio investir. Regra prática: tarefa mecânica com effort alto é dinheiro e tempo jogados fora; tarefa de projeto com effort baixo é retrabalho. |
 
-**O que mostrar:** o simulador de janela de contexto da doc oficial ([code/context-window.md](claude-oficial-doc/code/context-window.md)), ou uma reprodução dele em slide: barra de 200k enchendo item a item. Slide mais importante dos 60 minutos.
+**O que mostrar:** o simulador de janela de contexto da doc oficial ([code/context-window.md](claude-oficial-doc/code/context-window.md)), ou uma reprodução dele em slide: barra de 200k enchendo item a item. Slide mais importante da aula.
 
 **Âncora prática:** *"Conversa longa degrada porque o histórico inteiro volta a cada turno e vai empurrando o que importa para o meio do ruído. Por isso vale abrir sessão nova quando o assunto muda — e por isso vale escrever o `CLAUDE.md` uma vez em vez de reexplicar o projeto toda vez."*
 
@@ -70,7 +71,7 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 | Min | Tópico | Tratamento |
 |---|---|---|
-| 0–3 | Tool use via MCP | Abrir por aqui, não por tool use abstrato. MCP é protocolo cliente-servidor: o servidor expõe ferramentas com nome, descrição e schema; o cliente injeta essa lista no contexto; o modelo responde pedindo uma chamada; o cliente executa e devolve o resultado. **O modelo nunca executa nada — ele pede.** Para este público, essa é a frase que destrava tudo. |
+| 0–3 | Tool use via MCP | Abrir por aqui, não por tool use abstrato. MCP é protocolo cliente-servidor: o servidor expõe ferramentas com nome, descrição e schema; o harness injeta essa lista no contexto; o modelo responde pedindo uma chamada; o harness executa e devolve o resultado. **O modelo nunca executa nada — ele pede.** Para este público, essa é a frase que destrava tudo. |
 | 3–5 | O laço | Perceber, planejar, agir, observar, repetir. Desenhar o laço e mapear cada etapa no que acabou de ser descrito. O laço encerra quando o modelo devolve texto em vez de pedir ferramenta. |
 | 5–7 | Agente orquestrador | Quem roda o laço. Mantém o objetivo, decide qual ferramenta chamar, quando delegar e quando parar. É o papel, não um produto. |
 | 7–9.5 | Skills | Procedimento empacotado: um `SKILL.md` com nome, descrição e instruções. **O truque está no custo:** só a descrição fica em contexto (cerca de 450 tokens para o conjunto); o corpo carrega quando a skill é usada. Comparação direta com `CLAUDE.md`, que entra sempre. |
@@ -94,7 +95,7 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 | 2–3.5 | Chat | Conversa, Projects, memória, connectors. É onde o pesquisador começa: leitura de paper, exploração de ideia, escrita. Aqui contexto persistente tem cara de Project. |
 | 3.5–5 | Cowork | Trabalho delegado sobre arquivos e tarefas, com dispatch e agent teams. É o orquestrador do Bloco 3 com interface: vários agentes em paralelo sobre o mesmo material. |
 | 5–7 | Code | Agente no repositório. Quatro superfícies: terminal, IDE, desktop e web. Aqui aparecem `CLAUDE.md`, skills, references, subagents, hooks e checkpointing. Menção rápida: hooks executam comando determinístico em torno do modelo — gancho para reprodutibilidade no Bloco 5; checkpointing permite desfazer o que o agente fez. |
-| 7–9 | Tabela "quando usar qual" | Matriz conceito × produto, preenchida ao vivo: onde cada um dos doze conceitos aparece em Chat, Cowork e Code. Slide de referência, o aluno fotografa. |
+| 7–9 | Tabela "quando usar qual" | Matriz conceito × produto, preenchida ao vivo: onde cada um dos treze conceitos aparece em Chat, Cowork e Code. Começar pela primeira linha, o harness: os três produtos são harnesses diferentes sobre o mesmo modelo. Slide de referência, o aluno fotografa. |
 
 **O que mostrar:** a matriz conceito × produto. É o artefato que o aluno leva embora.
 
@@ -111,7 +112,7 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 | Min | Tópico | Tratamento |
 |---|---|---|
 | 0–1.5 | Quatro tipos de trabalho, não quatro domínios | (1) **Entender artefato herdado**: simulador que o aluno anterior deixou, pipeline de dados, protótipo de aplicação — o problema é sempre código sem quem o explique. (2) **Analisar resultado experimental**: saída de simulação, log, captura, planilha de coleta, resposta de questionário — o problema é sempre volume acima da leitura manual. (3) **Levantar e organizar literatura**: triagem de artigos, extração de critérios, montagem de tabela comparativa em revisão sistemática — com a ressalva de que o modelo **não é fonte bibliográfica**, e sim ferramenta de organização sobre textos que você forneceu. (4) **Apoiar a escrita**: estrutura, clareza, revisão de argumento. Um exemplo curto cada, sem demo. Atravessando os quatro: **reprodutibilidade** — o que o agente fez precisa virar script, commit e ambiente registrados, senão o experimento não volta. É aqui que hooks reaparecem, como o jeito determinístico de garantir isso em torno de um modelo que não é determinístico (Bloco 1). |
-| 1.5–3 | Permissões e plan mode | Um agente com acesso ao repositório edita arquivos e roda comandos. Modos de permissão definem o portão: pedir aprovação, aceitar edições, ou plan mode — o agente **planeja e mostra antes de agir**. Regra: repositório de terceiro, base de coleta ou qualquer artefato que você não pode recriar começa em plan mode. |
+| 1.5–3 | Permissões e plan mode | Um agente com acesso ao repositório edita arquivos e roda comandos. Quem pede aprovação é o **harness**, não o modelo: o portão está fora do componente estocástico, e é por isso que ele é confiável. Modos de permissão definem o portão: pedir aprovação, aceitar edições, ou plan mode — o agente **planeja e mostra antes de agir**. Regra: repositório de terceiro, base de coleta ou qualquer artefato que você não pode recriar começa em plan mode. |
 | 3–4 | Dados sensíveis | Duas categorias distintas. **Dado técnico:** credencial, chave, endereço de infraestrutura, captura com identificador de rede. **Dado de pessoa:** o que aparece em projeto de educação e de saúde — registro de aluno, prontuário, resposta de questionário, qualquer coisa sob TCLE ou aprovação de comitê de ética. Para a segunda categoria a régua não é o que a ferramenta permite, é o que o protocolo de pesquisa e a LGPD permitem: se o consentimento não previu processamento por serviço de terceiro, o dado não sai da máquina. Citar a política oficial de privacidade e uso de dados em vez de opinar. |
 | 4–5 | Verificação e honestidade acadêmica | Saída plausível não é saída correta — o Bloco 1 já provou. O que o modelo produz é rascunho até você rodar, conferir e reproduzir. Duas armadilhas específicas: referência bibliográfica inventada com aparência perfeita, e resultado numérico produzido sem executar nada. Declarar uso conforme a norma do programa e do veículo. Nada assinado por você entra sem você ter verificado. |
 
@@ -123,7 +124,7 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 | Min | Tópico |
 |---|---|
-| 0–1 | Retomar a pirâmide de dependências completa, agora com os doze conceitos posicionados. Uma frase por camada. |
+| 0–1 | Retomar a pirâmide de dependências completa, agora com os treze conceitos posicionados, e fechar nomeando o harness como a caixa onde todos eles acontecem. Uma frase por camada. |
 | 1–2 | Ponte para a Aula 2: o que vai ser construído, e a tarefa de preparação — instalar o Claude Code e chegar com 4 a 6 fontes da própria área rascunhadas. Dizer que quem chegar sem isso perde os primeiros 15 minutos. |
 
 ---

@@ -30,6 +30,8 @@ Antes de pedir qualquer coisa:
 
 **Anote o número.** Você ainda não pediu nada e a janela já tem conteúdo. Vamos comparar no final.
 
+O que aparece aí é o **harness** mostrando o orçamento: o Claude Code montou a requisição, leu arquivos de configuração e listou as skills disponíveis. O modelo em si não vê a sua máquina — vê só o texto que o harness enviou.
+
 ---
 
 ## 1. Criar o orquestrador, em plan mode (8 min)
