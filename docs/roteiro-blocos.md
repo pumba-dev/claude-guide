@@ -1,6 +1,6 @@
 # Roteiro bloco a bloco — Aula 1
 
-Detalhamento dos blocos 0 a 6, que compõem a **Aula 1 (~63 min, conceitual)**, definidos em [estrutura-apresentacao.md](estrutura-apresentacao.md). A ordem dos blocos é aprovada e não muda sem consultar o autor. Os tempos são estimativa de planejamento: dimensionam o conteúdo e orientam o que cortar sob pressão, mas o ritmo real acompanha a absorção da turma.
+Detalhamento dos blocos 0 a 6, que compõem a **Aula 1 (~66 min, conceitual)**, definidos em [estrutura-apresentacao.md](estrutura-apresentacao.md). A ordem dos blocos é aprovada e não muda sem consultar o autor. Os tempos são estimativa de planejamento: dimensionam o conteúdo e orientam o que cortar sob pressão, mas o ritmo real acompanha a absorção da turma.
 
 A **Aula 2 (60 min, prática)** tem plano próprio em [pratica-guiada.md](pratica-guiada.md), com a folha de prompts do aluno em [folha-do-aluno.md](folha-do-aluno.md).
 
@@ -65,19 +65,20 @@ Convenção de cada bloco: **objetivo** (o que o aluno leva), **roteiro minutado
 
 ---
 
-## Bloco 3 — Do sistema ao agente (15 min)
+## Bloco 3 — Do sistema ao agente (18 min)
 
 **Objetivo:** o aluno entende como um modelo que só prevê texto passa a executar trabalho, e conhece as quatro alavancas que ele mesmo controla: MCP, skills, references e subagents.
 
 | Min | Tópico | Tratamento |
 |---|---|---|
 | 0–3 | Tool use via MCP | Abrir por aqui, não por tool use abstrato. MCP é protocolo cliente-servidor: o servidor expõe ferramentas com nome, descrição e schema; o harness injeta essa lista no contexto; o modelo responde pedindo uma chamada; o harness executa e devolve o resultado. **O modelo nunca executa nada — ele pede.** Para este público, essa é a frase que destrava tudo. |
-| 3–5 | O laço | Perceber, planejar, agir, observar, repetir. Desenhar o laço e mapear cada etapa no que acabou de ser descrito. O laço encerra quando o modelo devolve texto em vez de pedir ferramenta. |
-| 5–7 | Agente orquestrador | Quem roda o laço. Mantém o objetivo, decide qual ferramenta chamar, quando delegar e quando parar. É o papel, não um produto. |
-| 7–9.5 | Skills | Procedimento empacotado: um `SKILL.md` com nome, descrição e instruções. **O truque está no custo:** só a descrição fica em contexto (cerca de 450 tokens para o conjunto); o corpo carrega quando a skill é usada. Comparação direta com `CLAUDE.md`, que entra sempre. |
-| 9.5–11.5 | References | Os arquivos de apoio da skill: `references/*.md`, `scripts/`, `assets/`. O `SKILL.md` cita e diz quando abrir; o modelo lê **só quando precisa**. Exemplo do público: uma skill de análise de captura com `references/formato-pcap.md` e `scripts/parse.py` — quarenta páginas de referência custam zero até o dia em que fazem falta. Script é **executado**, não lido: custo de contexto ainda menor. |
-| 11.5–14 | Subagents | Contexto isolado, com janela própria, que devolve só o resultado. Números do simulador: abrir um subagente custa cerca de 80 tokens no contexto principal e ele devolve cerca de 420. As leituras de arquivo que ele fez por dentro custam **zero** no principal. É a resposta direta ao problema do Bloco 2. |
-| 14–15 | Fechamento do bloco | Reamarrar: MCP dá capacidade, skills dão procedimento, references dão material sob demanda, subagents dão janela extra. As quatro alavancas são do aluno, não do fornecedor. |
+| 3–6 | **As mensagens trocadas** | Mostrar um turno completo em texto: a requisição que o harness monta (`system`, `messages`, `tools`); a resposta com blocos `thinking`, `text` e `tool_use`, fechada por `stop_reason: tool_use`; a nova requisição com o `tool_result` citando o `tool_use_id`; e a resposta final com `stop_reason: end_turn`. Três papéis (`system`, `user`, `assistant`) e cinco tipos de bloco dão conta de tudo. Detalhe que costuma surpreender: o resultado da ferramenta volta ao modelo com papel `user` — não há canal separado para máquina. |
+| 6–8 | O laço | Perceber, planejar, agir, observar, repetir. Desenhar o laço e mapear cada etapa no que acabou de ser descrito. O laço encerra quando o modelo devolve texto em vez de pedir ferramenta. |
+| 8–10 | Agente orquestrador | Quem roda o laço. Mantém o objetivo, decide qual ferramenta chamar, quando delegar e quando parar. É o papel, não um produto. |
+| 10–12.5 | Skills | Procedimento empacotado: um `SKILL.md` com nome, descrição e instruções. **O truque está no custo:** só a descrição fica em contexto (cerca de 450 tokens para o conjunto); o corpo carrega quando a skill é usada. Comparação direta com `CLAUDE.md`, que entra sempre. |
+| 12.5–14.5 | References | Os arquivos de apoio da skill: `references/*.md`, `scripts/`, `assets/`. O `SKILL.md` cita e diz quando abrir; o modelo lê **só quando precisa**. Exemplo do público: uma skill de análise de captura com `references/formato-pcap.md` e `scripts/parse.py` — quarenta páginas de referência custam zero até o dia em que fazem falta. Script é **executado**, não lido: custo de contexto ainda menor. |
+| 14.5–17 | Subagents | Contexto isolado, com janela própria, que devolve só o resultado. Números do simulador: abrir um subagente custa cerca de 80 tokens no contexto principal e ele devolve cerca de 420. As leituras de arquivo que ele fez por dentro custam **zero** no principal. É a resposta direta ao problema do Bloco 2. |
+| 17–18 | Fechamento do bloco | Reamarrar: MCP dá capacidade, skills dão procedimento, references dão material sob demanda, subagents dão janela extra. As quatro alavancas são do aluno, não do fornecedor. |
 
 **O que mostrar:** o laço desenhado e, ao lado, o mesmo laço com os números de token do subagente — a economia fica visível em vez de assertiva.
 

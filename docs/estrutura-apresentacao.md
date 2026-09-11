@@ -56,6 +56,7 @@ Entram a serviço dos treze acima, nunca como tópico próprio:
 | prompt caching | Bloco 2 | Fecha o loop de "sessão = reenvio stateless": o reenvio existe, mas não custa linearmente. |
 | compaction / auto-compact | Bloco 2 | O que o sistema faz quando a janela satura. Sem isso, sessão só aparece como problema. |
 | contagem de tokens e custo real | Bloco 2 | Dá número ao "orçamento finito". |
+| tipos de mensagem e `stop_reason` | Bloco 3 | Tornam o tool use concreto: mostram que a "chamada de ferramenta" é um bloco de texto estruturado, não uma chamada de função. |
 | hooks | Bloco 4 (menção) | Determinismo em torno de um núcleo estocástico; liga-se a reprodutibilidade. Poder alto, público errado para 60 min. |
 | agent teams / dispatch | Bloco 4 | Caso particular de orquestrador. Exemplo, não conceito. |
 | checkpointing | Bloco 4 (menção) | Conforto operacional, não capacidade nova. |
@@ -70,16 +71,16 @@ Duas aulas de 60 minutos.
 
 | Aula | Duração | Foco |
 |---|---|---|
-| **Aula 1 — Conceitos** | ~63 min | Blocos 0 a 6. Por que o modelo se comporta como se comporta e o que são os treze conceitos. |
+| **Aula 1 — Conceitos** | ~66 min | Blocos 0 a 6. Por que o modelo se comporta como se comporta e o que são os treze conceitos. |
 | **Aula 2 — Prática** | 60 min | Bloco P. Cada aluno constrói do zero o próprio agente de newsletter, com orquestrador, skills e references. |
 
 Separar em duas aulas resolve o aperto do formato anterior: a Aula 1 cabe sem cortar conteúdo, e a prática deixa de ser um apêndice de 30 min corridos.
 
-**Os tempos são estimativa de planejamento, não cronômetro.** Servem para dimensionar o conteúdo e decidir o que cortar sob pressão; o ritmo real se ajusta à absorção da turma. A Aula 1 passou de 60 para cerca de 63 min ao ganhar o harness, e isso é aceitável.
+**Os tempos são estimativa de planejamento, não cronômetro.** Servem para dimensionar o conteúdo e decidir o que cortar sob pressão; o ritmo real se ajusta à absorção da turma. A Aula 1 passou de 60 para cerca de 66 min ao ganhar o harness e a anatomia das mensagens, e isso é aceitável.
 
 **Entre as duas aulas:** enviar as instruções de instalação e pedir que cada aluno chegue com o Claude Code funcionando e uma lista rascunhada de 4 a 6 fontes da área dele. Isso devolve tempo real à Aula 2.
 
-## Aula 1 — Conceitos (~63 min)
+## Aula 1 — Conceitos (~66 min)
 
 **Não reordene os blocos sem consultar o autor.** A ordem segue uma cadeia de dependências conceituais: token sustenta janela de contexto, que sustenta sessão, thinking e effort; tool use sustenta orquestrador e subagents.
 
@@ -88,7 +89,7 @@ Separar em duas aulas resolve o aperto do formato anterior: a Aula 1 cabe sem co
 | 0 — Abertura | 3 min | Objetivo, mapa das duas aulas, o que cada um sai sabendo fazer. |
 | 1 — Fundamentos de LLM | 12 min | Discriminativo vs. generativo; token como unidade de custo, limite e latência; predição do próximo token; intuição de atenção e Transformer, com o custo superlinear que origina o limite de contexto; pré-treino vs. post-training; amostragem e temperatura; três limitações estruturais (alucinação, data de corte, ausência de estado). |
 | 2 — Anatomia de uma requisição | 17 min | **Harness**: você não conversa com o modelo, e sim com a aplicação em volta dele — quem monta a requisição, executa as ferramentas, aplica permissões e gerencia a janela; o que é enviado ao modelo a cada turno; janela de contexto como orçamento finito, com números de custo e contagem de tokens; sessão como reenvio de histórico em um modelo stateless, com consequências em custo, latência e degradação; prompt caching como a razão de o reenvio ser viável; compaction como resposta do sistema à saturação; contexto persistente (CLAUDE.md, Projects, memória) como o que atravessa sessões; escolha de modelo; thinking e effort. |
-| 3 — Do sistema ao agente | 15 min | Tool use apresentado via MCP e connectors, como protocolo cliente-servidor; laço perceber-planejar-agir-observar; agente orquestrador; skills carregadas sob demanda; references (`references/`, `scripts/`, `assets/`) como o material que a skill abre só quando precisa; subagents e contextos isolados como solução para saturação de janela. |
+| 3 — Do sistema ao agente | 18 min | Tool use apresentado via MCP e connectors, como protocolo cliente-servidor; **os tipos de mensagem trocados entre harness e modelo** — papéis `system`, `user` e `assistant`, blocos `text`, `thinking`, `tool_use` e `tool_result`, e o `stop_reason` que decide se o laço continua; laço perceber-planejar-agir-observar; agente orquestrador; skills carregadas sob demanda; references (`references/`, `scripts/`, `assets/`) como o material que a skill abre só quando precisa; subagents e contextos isolados como solução para saturação de janela. |
 | 4 — Claude concreto | 9 min | Família de modelos; Chat, Cowork e Code como três interfaces sobre a mesma base conceitual; superfícies do Code (terminal, IDE, desktop, web); onde cada conceito da Camada C aparece em cada produto — Projects e memória no Chat, dispatch e agent teams no Cowork, skills, subagents, hooks e checkpointing no Code; tabela de "quando usar qual". |
 | 5 — Aplicação em pesquisa em computação | 5 min | Organizado por **tipo de trabalho, não por domínio**, para cobrir os projetos do laboratório — de redes ópticas elásticas a aplicações em educação e saúde e revisões bibliográficas: entender artefato herdado, analisar resultado experimental, levantar e organizar literatura, apoiar a escrita; **permissões e modos de execução (incl. plan mode)** como portão do agente sobre um repositório real; verificação obrigatória, dados sensíveis — distinguindo dado técnico de dado de pessoa sob TCLE, ética em pesquisa e LGPD, com a política oficial de privacidade e uso de dados — e honestidade acadêmica. |
 | 6 — Fechamento | 2 min | Fechamento, ponte para a Aula 2 e tarefa de preparação: instalar o Claude Code e rascunhar 4 a 6 fontes da própria área. |

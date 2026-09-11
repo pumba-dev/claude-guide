@@ -471,7 +471,7 @@ def fig_laco_agente():
     ax.text(
         5.0,
         0.55,
-        "O modelo nunca executa nada: ele pede. Quem executa é o cliente, que devolve o resultado.",
+        "O modelo nunca executa nada: ele pede. Quem executa é o harness, que devolve o resultado.",
         ha="center",
         fontsize=11.5,
         color=E.TEXTO,
@@ -591,7 +591,7 @@ def fig_skill_references():
     ax.text(4.15, 3.35, "poucas centenas de tokens", ha="left", fontsize=9.5, color=E.TEXTO_FRACO)
 
     _caixa(ax, 4.1, 1.95, 3.0, 0.85, "SKILL.md\ncarrega ao ser usada", E.CAMADA_C, fonte=11, alpha=0.75)
-    _seta(ax, (5.6, 3.55), (5.6, 2.85), cor=E.CAMADA_C)
+    _seta(ax, (6.75, 3.55), (6.75, 2.85), cor=E.CAMADA_C)
 
     for i, (nome, desc) in enumerate(
         [("references/*.md", "lido só quando citado"), ("scripts/*.py", "executado, não lido"), ("assets/", "template, esquema")]
@@ -822,6 +822,87 @@ def fig_harness():
         "A resposta que sai do modelo é texto. Quem executa qualquer coisa a partir dela é o harness.",
         fontsize=10.5,
         color=E.TEXTO_FRACO,
+    )
+    return fig
+
+
+# --- 13. As mensagens trocadas entre harness e modelo -----------------------
+
+
+def fig_mensagens():
+    """Um turno completo: o que vai, o que volta, e por que o laço repete."""
+    fig, ax = plt.subplots(figsize=(13.2, 5.5))
+    ax.set_xlim(0, 13)
+    ax.set_ylim(0, 6.35)
+    _limpa(ax)
+
+    ax.text(2.5, 6.05, "harness", ha="center", fontsize=13, color=E.ACENTO, weight="bold")
+    ax.text(10.5, 6.05, "modelo", ha="center", fontsize=13, color=E.TEXTO_FRACO, weight="bold")
+    for x in (2.5, 10.5):
+        ax.plot([x, x], [0.3, 5.85], color=E.LINHA, linewidth=1.1, zorder=1)
+
+    # (lado, y, título, linhas, cor, rótulo da seta)
+    trocas = [
+        ("→", 5.2, "requisição",
+         ['system: "você é um assistente…"',
+          'messages: [ {role: "user", content: [text]} ]',
+          'tools: [ {name: "read_file", input_schema} ]'],
+         E.ACENTO, "o harness monta e envia"),
+        ("←", 3.72, "resposta  ·  stop_reason: tool_use",
+         ['{role: "assistant", content: [',
+          '  {type: "thinking"}, {type: "text"},',
+          '  {type: "tool_use", id: "tu_01", input: {…}} ] }'],
+         E.TEXTO_FRACO, "o modelo pede uma ferramenta"),
+        ("→", 2.12, "nova requisição",
+         ['{role: "user", content: [',
+          '  {type: "tool_result", tool_use_id: "tu_01",',
+          '   content: "…", is_error: false} ] }'],
+         E.ACENTO, "histórico inteiro + resultado da execução"),
+        ("←", 0.6, "resposta  ·  stop_reason: end_turn",
+         ['{role: "assistant", content: [ {type: "text"} ] }'],
+         E.OK, "o laço encerra"),
+    ]
+
+    for sentido, y, titulo, linhas, cor, legenda in trocas:
+        altura = 0.46 + 0.30 * len(linhas)
+        _caixa(ax, 3.1, y - altura + 0.55, 6.8, altura, "", cor, alpha=0.10)
+        ax.add_patch(
+            FancyBboxPatch(
+                (3.1, y - altura + 0.55),
+                6.8,
+                altura,
+                boxstyle="round,pad=0.02,rounding_size=0.06",
+                facecolor="none",
+                edgecolor=cor,
+                linewidth=1.1,
+                zorder=3,
+            )
+        )
+        ax.text(3.42, y + 0.3, titulo, fontsize=12, color=cor, weight="bold", zorder=4)
+        ax.text(9.6, y + 0.3, legenda, ha="right", fontsize=10, color=E.TEXTO_FRACO, zorder=4)
+        for i, linha in enumerate(linhas):
+            ax.text(
+                3.42,
+                y - 0.04 - i * 0.30,
+                linha,
+                fontsize=10.8,
+                family=E.FONTE_MONO,
+                color=E.TEXTO,
+                zorder=4,
+            )
+        if sentido == "→":
+            _seta(ax, (2.55, y + 0.3), (3.05, y + 0.3), cor=cor, lw=1.6)
+            _seta(ax, (9.95, y + 0.3), (10.45, y + 0.3), cor=cor, lw=1.6)
+        else:
+            _seta(ax, (10.45, y + 0.3), (9.95, y + 0.3), cor=cor, lw=1.6)
+            _seta(ax, (3.05, y + 0.3), (2.55, y + 0.3), cor=cor, lw=1.6)
+
+    ax.text(
+        0.35,
+        0.12,
+        "Tudo é texto estruturado. O modelo não chama a função: ele devolve um bloco tool_use, e o harness decide o que fazer com ele.",
+        fontsize=11.5,
+        color=E.TEXTO,
     )
     return fig
 

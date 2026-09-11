@@ -190,6 +190,34 @@
 
 ---
 
+# As mensagens trocadas
+:fig mensagens
+:fonte Estrutura conforme a Messages API da documentação oficial da Claude API (set. 2026). Campos abreviados.
+> Ler a figura de cima para baixo, narrando. O ponto que fica: nada aqui é chamada de função. É texto estruturado indo e voltando, e o `stop_reason` é o que diz ao harness se o laço continua ou para.
+
+---
+
+# O vocabulário das mensagens
+- **Papéis**: `system`, `user` e `assistant`
+  - o resultado de uma ferramenta chega como `user`: não há canal separado para máquina
+- **Blocos de conteúdo**: `text`, `thinking`, `tool_use`, `tool_result`
+  - imagem e documento entram como blocos também
+- **`stop_reason`**: por que o modelo parou
+  - `tool_use` pede execução · `end_turn` encerra · `max_tokens` truncou
+> É tudo a mesma conversa — por isso ela cresce tão rápido. Sem canal separado para máquina, resultado de ferramenta ocupa a mesma janela do Bloco 2.
+
+---
+
+# Três regras que explicam muita coisa
+- Todo `tool_result` cita o `tool_use_id` do pedido que o originou
+  - é o que permite ao modelo casar resposta com pergunta quando há várias em voo
+- Se o modelo pediu várias ferramentas, **todos** os resultados voltam em uma única mensagem
+  - devolver em mensagens separadas ensina o modelo a parar de pedir em paralelo
+- Erro também é resultado: volta como `tool_result` com `is_error`, nunca como silêncio
+> Essas três regras são do harness, não suas. Servem para explicar por que o agente às vezes "esquece" de paralelizar: normalmente é o laço que foi mal implementado, não o modelo.
+
+---
+
 # O laço
 :fig laco-agente
 :fonte Elaboração própria.

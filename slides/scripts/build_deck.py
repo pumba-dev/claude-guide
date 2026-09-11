@@ -135,19 +135,24 @@ def escreve(par, texto, *, fonte, tamanho, cor, negrito=False, italico=False, es
     for parte in re.split(r"(\*\*.+?\*\*|`[^`]+`)", texto):
         if not parte:
             continue
-        em_negrito, mono = negrito, False
+        em_negrito = negrito
         if parte.startswith("**") and parte.endswith("**"):
             parte, em_negrito = parte[2:-2], True
-        elif parte.startswith("`") and parte.endswith("`"):
-            parte, mono = parte[1:-1], True
-        run = par.add_run()
-        run.text = parte
-        run.font.name = E.FONTE_MONO if mono else fonte
-        run.font.size = Pt(tamanho * 0.92 if mono else tamanho)
-        run.font.color.rgb = rgb(cor)
-        run.font.bold = em_negrito
-        run.font.italic = italico
-        ultimo = run
+        # Código dentro de negrito ainda é código: divide de novo pelas crases.
+        for pedaco in re.split(r"(`[^`]+`)", parte):
+            if not pedaco:
+                continue
+            mono = pedaco.startswith("`") and pedaco.endswith("`")
+            if mono:
+                pedaco = pedaco[1:-1]
+            run = par.add_run()
+            run.text = pedaco
+            run.font.name = E.FONTE_MONO if mono else fonte
+            run.font.size = Pt(tamanho * 0.92 if mono else tamanho)
+            run.font.color.rgb = rgb(cor)
+            run.font.bold = em_negrito
+            run.font.italic = italico
+            ultimo = run
     return ultimo
 
 
