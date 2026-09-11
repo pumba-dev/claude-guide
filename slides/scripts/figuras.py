@@ -429,7 +429,7 @@ def fig_sessao_stateless():
     ax.text(
         0.35,
         4.75,
-        "O modelo não guarda estado. A conversa existe porque o cliente reenvia tudo, a cada turno.",
+        "O modelo não guarda estado. A conversa existe porque o harness reenvia tudo, a cada turno.",
         fontsize=11.5,
         color=E.TEXTO,
     )
